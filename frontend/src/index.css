@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #f3f6f8;
+  --bg-elevated: #ffffff;
+  --bg-muted: #e8eef3;
+  --text: #202730;
+  --text-muted: #4c647d;
+  --border: #d3dce6;
+  --accent: #247a77;
+  --accent-soft: #d5f1ee;
+  --danger: #c23b3b;
+  --danger-soft: #fde8e8;
+  --ring: rgba(36, 122, 119, 0.35);
+  --page-glow: radial-gradient(1200px 600px at 10% -10%, rgba(36, 122, 119, 0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(97, 124, 151, 0.1), transparent 50%);
+}
+
+.dark {
+  color-scheme: dark;
+  --bg: #12171c;
+  --bg-elevated: #1a2229;
+  --bg-muted: #24303a;
+  --text: #ebeff4;
+  --text-muted: #adbdce;
+  --border: #364556;
+  --accent: #4ab3ad;
+  --accent-soft: rgba(74, 179, 173, 0.15);
+  --danger: #f07171;
+  --danger-soft: rgba(192, 59, 59, 0.2);
+  --ring: rgba(74, 179, 173, 0.4);
+  --page-glow: radial-gradient(1000px 500px at 0% 0%, rgba(74, 179, 173, 0.12), transparent 55%),
+    radial-gradient(800px 400px at 100% 10%, rgba(97, 124, 151, 0.12), transparent 50%);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-screen font-sans text-[var(--text)] antialiased;
+    background-color: var(--bg);
+    background-image: var(--page-glow);
+    background-attachment: fixed;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10;
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] shadow-card;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-[var(--border)] bg-[var(--bg-elevated)] px-4 py-3
+      text-[var(--text)] outline-none transition
+      placeholder:text-[var(--text-muted)]
+      focus:border-brand-500 focus:ring-2 focus:ring-[var(--ring)];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-5 py-3
+      font-semibold text-white transition hover:bg-brand-700
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]
+      disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)]
+      bg-transparent px-3 py-2 text-sm font-medium text-[var(--text)] transition
+      hover:bg-[var(--bg-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)];
+  }
+}
