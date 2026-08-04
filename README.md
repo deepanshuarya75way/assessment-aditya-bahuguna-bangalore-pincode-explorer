@@ -1,8 +1,14 @@
 # Bangalore Pincode Explorer
 
-A production-style full-stack web app that looks up **Bangalore post offices by pincode**. Users enter a pincode starting with `560`, the Express API validates it, fetches data from the [India Post Postal Pincode API](https://api.postalpincode.in/), stores successful searches in MongoDB Atlas, and the React frontend presents results in a clean SaaS-style dashboard.
+A full-stack web app that looks up **Bangalore post offices by pincode**. Users enter a pincode starting with `560`, the Express API validates it, fetches data from the [India Post Postal Pincode API](https://api.postalpincode.in/), stores successful searches in MongoDB Atlas, and the React frontend presents results in a clean SaaS-style dashboard.
 
-Built as a realistic internship take-home: clear architecture, maintainable layers, and an interview-friendly codebase.
+## Live demo
+
+**App:** [https://bangalore-pincode-explorer-xi.vercel.app/](https://bangalore-pincode-explorer-xi.vercel.app/)
+
+**API:** [https://bangalore-pincode-explorer-eol4.onrender.com](https://bangalore-pincode-explorer-eol4.onrender.com)
+
+> Note: the free Render API may take 30–60 seconds to wake on the first request after idle.
 
 ---
 
@@ -159,8 +165,8 @@ Lightweight health check for Render.
 ### 1. Clone and install
 
 ```bash
-git clone <your-repo-url>
-cd banglore
+git clone https://github.com/Jaegerpie/bangalore-pincode-explorer.git
+cd bangalore-pincode-explorer
 
 cd backend && npm install && cd ..
 cd frontend && npm install && cd ..
@@ -245,7 +251,7 @@ Open [http://localhost:5173](http://localhost:5173).
 5. Add env vars:
    - `NODE_ENV=production`
    - `MONGODB_URI=<your Atlas URI>`
-   - `CLIENT_URL=https://your-app.vercel.app`
+   - `CLIENT_URL=https://bangalore-pincode-explorer-xi.vercel.app`
    - (optional) `POSTAL_API_BASE_URL`
 6. Confirm `https://<your-service>.onrender.com/health` returns OK.
 
@@ -256,7 +262,7 @@ Open [http://localhost:5173](http://localhost:5173).
 1. Import the same GitHub repo in Vercel.
 2. Set **Root Directory** to `frontend`.
 3. Framework preset: Vite · Build: `npm run build` · Output: `dist`.
-4. Add env: `VITE_API_URL=https://<your-service>.onrender.com`
+4. Add env: `VITE_API_URL=https://bangalore-pincode-explorer-eol4.onrender.com`
 5. Deploy, then update Render `CLIENT_URL` to the Vercel URL if you hadn’t already.
 
 `frontend/vercel.json` rewrites all routes to `index.html` for SPA-safe refreshes.
@@ -266,32 +272,6 @@ Open [http://localhost:5173](http://localhost:5173).
 - Create a cluster and database user.
 - Network Access: allow Render IPs or `0.0.0.0/0` for demos (tighten for real production).
 - Copy the `mongodb+srv://…` URI into `MONGODB_URI`.
-
----
-
-## Screenshots
-
-Add product screenshots here after your first local or deployed run:
-
-| Light mode — search & results | Dark mode — recent searches |
-| --- | --- |
-| `docs/screenshots/light-results.png` | `docs/screenshots/dark-history.png` |
-
-Suggested captures:
-
-1. Empty dashboard with search box  
-2. Successful results for `560001`  
-3. Validation error for a non-Bangalore pin  
-4. Dark mode view  
-
----
-
-## Interview talking points
-
-- **Why a service layer?** Keeps HTTP (controllers) separate from India Post + Mongo logic — easier to test and explain.
-- **Why validate on both sides?** Instant UX on the client; security and correctness on the server.
-- **Why not call India Post from the browser?** Centralize rate limits, CORS, logging, and history writes.
-- **Why history only on success?** Spec-aligned; failed lookups don’t pollute recent searches.
 
 ---
 
